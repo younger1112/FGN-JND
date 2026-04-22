@@ -2,9 +2,9 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
-class FHDR(nn.Module):
+class HPP(nn.Module):
     def __init__(self, level):
-        super(FHDR, self).__init__()
+        super(HPP, self).__init__()
         
         self.level = level
 
@@ -138,14 +138,7 @@ class make_dense(nn.Module):
 class gycblock(nn.Module):
     def __init__(self,channels_in,channels_out):
         super(gycblock, self).__init__()
-        self.recp7 = nn.Sequential(
-            BasicConv(channels_in, channels_in, kernel_size=7, dilation=1, padding=3, groups=channels_in, bias=False),
-            BasicConv(channels_in, channels_in, kernel_size=1, dilation=1, bias=False),
-
-            BasicConv(channels_in, channels_in, kernel_size=3, dilation=7, padding=7, groups=channels_in, bias=False,
-                      relu=False),
-            BasicConv(channels_in, channels_in, kernel_size=1, dilation=1, bias=False)
-        )
+        
 
         self.recp5 = nn.Sequential(
             BasicConv(channels_in, channels_in, kernel_size=5, dilation=1, padding=2, groups=channels_in, bias=False),
@@ -171,13 +164,13 @@ class gycblock(nn.Module):
 
     def forward(self, x,level):
         if level==1:
-            out = self.recp7(x)
-            
-        elif level==2:
             out = self.recp5(x)
             
-        else: 
+        elif level==2:
             out = self.recp3(x)
+            
+        else: 
+            out = self.recp1(x)
             
 
         return out

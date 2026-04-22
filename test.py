@@ -9,13 +9,11 @@ from utils import is_image_file, load_img, save_img
 import torch
 from torchvision import transforms
 from PIL import Image
-#from ImageFeatNet import ImageFeatNet  # 导入你的模型定义
-#import config  # 确保导入了包含配置的模块
-# Testing settings
+
 parser = argparse.ArgumentParser(description='pix2pix-pytorch-implementation')
 parser.add_argument('--dataset', default='CPL-Set')
 parser.add_argument('--direction', type=str, default='b2a', help='a2b or b2a')
-parser.add_argument('--nepochs', type=int, default=300, help='saved model of which epochs')
+parser.add_argument('--nepochs', type=int, default=200, help='saved model of which epochs')
 parser.add_argument('--cuda', default='true', help='use cuda?')
 opt = parser.parse_args()
 print(opt)
@@ -47,7 +45,7 @@ for image_name in image_filenames:
     input = img.unsqueeze(0).to(device)
     
     out = net_g(input)
-    # 打印输出列表的长度
+    
     print("Number of outputs in the list: {}".format(len(out)))
     # output is the final reconstructed image i.e. last in the array of outputs of n iterations
     output = out[-2]

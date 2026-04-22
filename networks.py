@@ -4,10 +4,10 @@ from torch.nn import init
 import functools
 from torch.optim import lr_scheduler
 import sys
-#from option import args
+
 from collections import OrderedDict
 import torch.nn.functional as F  
-#from HVPNet import FastSal
+
 from HPP import HPP
 from D import NLayerDiscriminator,PixelDiscriminator,GANLoss
 def get_norm_layer(norm_type='instance'):
@@ -40,7 +40,6 @@ def get_scheduler(optimizer, opt):
     return scheduler
 
 
-# update learning rate (called once every epoch)
 def update_learning_rate(scheduler, optimizer):
     scheduler.step()
     lr = optimizer.param_groups[0]['lr']

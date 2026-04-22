@@ -26,9 +26,7 @@ class DatasetFromFolder(data.Dataset):
     def __getitem__(self, index):
         a = Image.open(join(self.a_path, self.image_filenames[index])).convert('RGB')
         b = Image.open(join(self.b_path, self.image_filenames[index])).convert('RGB')
-        # 不调整图像大小
-        # a = a.resize((256, 256), Image.BICUBIC)  
-        # b = b.resize((256, 256), Image.BICUBIC)  
+       
         a = transforms.ToTensor()(a)
         b = transforms.ToTensor()(b)
         
@@ -65,7 +63,7 @@ class DatasetFromFolder(data.Dataset):
 
         a = self.transform(a)
         b = self.transform(b)
-        #c = self.transform(c)
+       
 
         if self.direction == "a2b":
             return a, b

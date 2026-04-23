@@ -10,7 +10,7 @@ import torch
 from torchvision import transforms
 from PIL import Image
 
-parser = argparse.ArgumentParser(description='pix2pix-pytorch-implementation')
+parser = argparse.ArgumentParser(description='')
 parser.add_argument('--dataset', default='CPL-Set')
 parser.add_argument('--direction', type=str, default='b2a', help='a2b or b2a')
 parser.add_argument('--nepochs', type=int, default=200, help='saved model of which epochs')
@@ -47,7 +47,7 @@ for image_name in image_filenames:
     out = net_g(input)
     
     print("Number of outputs in the list: {}".format(len(out)))
-    # output is the final reconstructed image i.e. last in the array of outputs of n iterations
+   
     output = out[-2]
     out_img = output.detach().squeeze(0).cpu()
     print(out_img.shape)

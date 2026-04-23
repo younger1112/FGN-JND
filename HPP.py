@@ -164,13 +164,13 @@ class gycblock(nn.Module):
 
     def forward(self, x,level):
         if level==1:
-            out = self.recp5(x)
+            out = self.recp1(x)
             
         elif level==2:
             out = self.recp3(x)
             
         else: 
-            out = self.recp1(x)
+            out = self.recp5(x)
             
 
         return out

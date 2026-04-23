@@ -42,33 +42,3 @@ class DatasetFromFolder(data.Dataset):
         return len(self.image_filenames)
 
 
-""" class DatasetFromFolder(data.Dataset):
-    def __init__(self, image_dir, direction):
-        super(DatasetFromFolder, self).__init__()
-        self.direction = direction
-        self.a_path = join(image_dir, "a")
-        self.b_path = join(image_dir, "b")
-        #self.c_path = join(image_dir, "c")
-        self.image_filenames = [x for x in listdir(self.a_path) if is_image_file(x)]
-        self.images = [join(self.a_path, x) for x in self.image_filenames]
-
-        transform_list = [transforms.ToTensor(),
-                          transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))]
-        self.transform = transforms.Compose(transform_list)
-
-    def __getitem__(self, index):
-        a = Image.open(self.images[index]).convert('RGB')
-        b = Image.open(join(self.b_path, self.image_filenames[index])).convert('RGB')
-        #c = Image.open(join(self.c_path, self.image_filenames[index])).convert('RGB')
-
-        a = self.transform(a)
-        b = self.transform(b)
-       
-
-        if self.direction == "a2b":
-            return a, b
-        else:
-            return b, a
-    def __len__(self):
-        return len(self.image_filenames)
- """
